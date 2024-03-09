@@ -49,9 +49,9 @@ resource "aws_instance" "blog" {
 module "alb" {
   source = "terraform-aws-modules/alb/aws"
 
-  name    = "blog-alb"
-  vpc_id  = "module.blog_vpc.vpc_id"
-  subnets = [module.blog_sg.security_group_id]
+  name    = "my-alb"
+  vpc_id  = "vpc-abcde012"
+  subnets = ["subnet-abcde012", "subnet-bcde012a"]
 
   # Security Group
   security_group_ingress_rules = {
@@ -77,6 +77,9 @@ module "alb" {
     }
   }
 
+  access_logs = {
+    bucket = "my-alb-logs"
+  }
 
   listeners = {
     ex-http-https-redirect = {
@@ -101,7 +104,7 @@ module "alb" {
 
   target_groups = {
     ex-instance = {
-      name_prefix      = "blog"
+      name_prefix      = "h1"
       protocol         = "HTTP"
       port             = 80
       target_type      = "instance"
@@ -109,7 +112,7 @@ module "alb" {
   }
 
   tags = {
-    Environment = "dev"
+    Environment = "Development"
     Project     = "Example"
   }
 }
