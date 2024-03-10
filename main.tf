@@ -109,7 +109,7 @@ module "alb" {
 
   target_groups = {
     ex-instance = {
-      name_prefix      = "h1"
+      name_prefix      = "blog"
       protocol         = "HTTP"
       port             = 80
       target_type      = "instance"
@@ -117,7 +117,7 @@ module "alb" {
   }
 
   tags = {
-    Environment = "Development"
+    Environment = "Dev"
     Project     = "Example"
   }
 }
