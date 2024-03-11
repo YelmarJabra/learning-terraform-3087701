@@ -19,7 +19,7 @@ data "aws_vpc" "default" {
 }
 
 module "blog_vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source = "terraform-aws-modules/blog_vpc/aws"
 
   name = "dev"
   cidr = "10.0.0.0/16"
