@@ -19,7 +19,7 @@ data "aws_vpc" "default" {
 }
 
 module "blog_vpc" {
-  source = "terraform-aws-modules/blog_vpc/aws"
+  source = "terraform-aws-modules/vpc/aws"
 
   name = "dev"
   cidr = "10.0.0.0/16"
@@ -42,7 +42,7 @@ module "autoscaling" {
   max_size = 2
 
   vpc_zone_identifier = module.blog_vpc.public_subnets
-  target_group_arns   = module.blog.alb.target_group_arns
+  target_group_arns   = module.alb.target_group_arns
   security_groups = [module.blog_sg.security_group_id]
 
   image_id = data.aws_ami.app_ami.id
